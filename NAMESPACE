@@ -1,0 +1,2 @@
+import(openxlsx)
+export(bordear,escribirTabla,reducir,trim)
