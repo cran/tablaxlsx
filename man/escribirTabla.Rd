@@ -12,7 +12,9 @@ escribirTabla(tabla, wb=NULL,hoja=NULL,fichero=NULL,
               cabecerasFila = TRUE, cabecerasColumna = TRUE, anchoCabecera = 10,
               anchoDatos = 14, escudo = NULL,posEscudo=c(1,1),
               tamEscudo=c(2.7,4.5),unidadesEscudo="cm",
-              estilos = NULL,bordes = NULL, estilosBordes = NULL)
+              estilos = NULL,
+              bordes = c("TABLA","CABECERA","CABECERASFILA","CABECERASCOLUMNA","DATOS"),
+              estilosBordes = NULL)
 }
 
 \arguments{
@@ -53,14 +55,14 @@ If it have created a Workbook returns the Workbook created, otherwise returns a 
 \seealso{\link{createStyle}}
 
 \examples{
-## Example
+## Example 1
 matriz=matrix(runif(20),4,5)
 wb=createWorkbook()
 hoja=addWorksheet(wb,"Prueba")
 escribirTabla(matriz,wb,hoja,fila=4,columna=4)
 if(interactive()) openXL(wb)
 
-# Otro ejemplo
+# Example 2
 f1=ftable(mtcars[,c(2,8:11)],col.vars=3:4)
 wb=escribirTabla(f1,estilos=estilosDGE,bordes=c("TABLA","DATOS"),
                  escudo=system.file("img/logoJMR.png",package="tablaxlsx"))

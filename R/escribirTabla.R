@@ -6,8 +6,11 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
          cabecerasFila=TRUE,cabecerasColumna=TRUE,
          anchoCabecera=10,anchoDatos=14,
          escudo=NULL,posEscudo=c(1,1),tamEscudo=c(2.7,4.5),unidadesEscudo="cm",
-         estilos=NULL,bordes=NULL,estilosBordes=NULL){
-  # bordes puede ser TABLA,CABECERA,CABECERAFILAS,CABECERACOLUMNAS,DATOS
+         estilos=NULL,bordes=c("TABLA","CABECERA","CABECERASFILA","CABECERASCOLUMNA","DATOS"),
+         estilosBordes=NULL){
+  # bordes puede ser TABLA,CABECERA,CABECERASFILA,CABECERASCOLUMNA,DATOS
+  
+  if(length(dim(tabla))!=2) stop("tabla: incorrect number of dimensions")
   wbCreado=FALSE
   
   if(is.null(wb)){
@@ -29,7 +32,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
       formatoNumero[i]=paste0(formatoNumero[i],".",paste(rep("0",decimales[i]),collapse=""))
     }
     if(porcentaje[i]) formatoNumero[i]=paste0(formatoNumero[i],"%")
-    tabla[,i]=round(tabla[,i],decimales[i])
+    #tabla[,i]=round(tabla[,i],decimales[i])
   }
   
   estiloCabeceraColumna=estilos$estiloCabeceraColumna
