@@ -2,6 +2,9 @@ reducir <-
 function(x,valores=NA,filas=TRUE,columnas=TRUE){
   a1=limpiar(x,valores,filas,columnas)
   x2=x[a1$Filas,a1$Columnas]
+  dim(x2)=c(sum(a1$Filas),sum(a1$Columnas))
+  colnames(x2)=colnames(x)[a1$Columnas]
+  rownames(x2)=rownames(x)[a1$Filas]
   if(!inherits(x,"ftable") & 
      (is.null(attr(x,"cabFila")) | is.null(attr(x,"cabColumna")))){
     return(x2)
