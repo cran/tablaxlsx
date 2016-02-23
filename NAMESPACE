@@ -1,2 +1,2 @@
 import(openxlsx)
-export(bordear,escribirTabla,reducir,trim)
+export(bordear,escribirTabla,reducir,trim,tablaxlsx.estilos.set)

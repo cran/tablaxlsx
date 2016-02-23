@@ -6,7 +6,8 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
          cabecerasFila=TRUE,cabecerasColumna=TRUE,
          anchoCabecera=10,anchoDatos=14,
          escudo=NULL,posEscudo=c(1,1),tamEscudo=c(2.7,4.5),unidadesEscudo="cm",
-         estilos=NULL,bordes=c("TABLA","CABECERA","CABECERASFILA","CABECERASCOLUMNA","DATOS"),
+         estilos=options("tablaxlsx.Estilos")[[1]],
+         bordes=c("TABLA","CABECERA","CABECERASFILA","CABECERASCOLUMNA","DATOS"),
          estilosBordes=NULL){
   # bordes puede ser TABLA,CABECERA,CABECERASFILA,CABECERASCOLUMNA,DATOS
   

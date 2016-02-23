@@ -12,13 +12,13 @@ escribirTabla(tabla, wb=NULL,hoja=NULL,fichero=NULL,
               cabecerasFila = TRUE, cabecerasColumna = TRUE, anchoCabecera = 10,
               anchoDatos = 14, escudo = NULL,posEscudo=c(1,1),
               tamEscudo=c(2.7,4.5),unidadesEscudo="cm",
-              estilos = NULL,
+              estilos=options("tablaxlsx.Estilos")[[1]],
               bordes = c("TABLA","CABECERA","CABECERASFILA","CABECERASCOLUMNA","DATOS"),
               estilosBordes = NULL)
 }
 
 \arguments{
-  \item{tabla}{The matix, data.frame or ftable to write}
+  \item{tabla}{The matrix, data.frame or ftable to write}
   \item{wb}{The Workbook. If NULL is created}
   \item{hoja}{The name o position of Worksheet. If it does not exist or is NULL is created}
   \item{fichero}{The name of a file where the Workbook is saved. If NULL it is not saved}
@@ -40,7 +40,7 @@ escribirTabla(tabla, wb=NULL,hoja=NULL,fichero=NULL,
   \item{posEscudo}{Position, row and column, of the figure, if escudo is not NULL}
   \item{tamEscudo}{A vector with Height and  Width of the figure}
   \item{unidadesEscudo}{Units of the height of the image. By default "cm"}
-  \item{estilos}{A list with the styles to apply to the various elements of the table}
+  \item{estilos}{A list with the styles to apply to the various elements of the table.}
   \item{bordes}{A vector with the names of the elements in the table will be to surround with edges,  the possible values are:
 HEADER, CABECERASFILA, CABECERASCOLUMNA, DATOS, TABLA (the entire table)}
   \item{estilosBordes}{A list with the styles of the various edges. Each item will be called with one of the possible names on bordes.}

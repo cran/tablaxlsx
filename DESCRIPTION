@@ -1,6 +1,6 @@
 Package: tablaxlsx
 Title: Write Formatted Tables in Excel Workbooks
-Version: 1.0.5
+Version: 1.0.6
 Date: 2016-02-14
 Author: Jesus Maria Rodriguez Rodriguez
 Maintainer: Jesus Maria Rodriguez Rodriguez <jesusmro@ono.com>
@@ -10,6 +10,6 @@ License: GPL-3
 LazyData: true
 Encoding: latin1
 NeedsCompilation: no
-Packaged: 2016-02-15 18:11:40 UTC; Jesus
+Packaged: 2016-02-23 17:54:03 UTC; Jesus
 Repository: CRAN
-Date/Publication: 2016-02-15 23:20:38
+Date/Publication: 2016-02-23 23:03:54
