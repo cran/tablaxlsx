@@ -11,7 +11,9 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
          estilosBordes=NULL){
   # bordes puede ser TABLA,CABECERA,CABECERASFILA,CABECERASCOLUMNA,DATOS
   
-  if(length(dim(tabla))!=2) stop("tabla: incorrect number of dimensions")
+  if(length(dim(tabla))!=2){
+  	tabla=tryCatch(as.matrix(tabla),error=function(e) stop("tabla: incorrect number of dimensions"))
+  } 
   wbCreado=FALSE
   
   if(is.null(wb)){
@@ -33,7 +35,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
       formatoNumero[i]=paste0(formatoNumero[i],".",paste(rep("0",decimales[i]),collapse=""))
     }
     if(porcentaje[i]) formatoNumero[i]=paste0(formatoNumero[i],"%")
-    #tabla[,i]=round(tabla[,i],decimales[i])
+    if(inherits(tabla[,i],"numeric")) tabla[,i]=round(tabla[,i],decimales[i])
   }
   
   estiloCabeceraColumna=estilos$estiloCabeceraColumna
@@ -169,6 +171,15 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
     } 
   }
   
+  if(fila<filadatos | columna<columnadatos){
+  	colorf=NULL
+  	if(!is.null(estiloCabeceraFila$fill$fillFg$rgb)) colorf=paste0("#",substr(estiloCabeceraFila$fill$fillFg$rgb,3,12))
+    addStyle(wb,hoja,createStyle(fgFill=colorf),
+             cols=columna:(columnadatos-1),
+             rows=fila:(filadatos-1),
+             gridExpand = TRUE, stack = TRUE)
+  }
+  
   ####################Escribir los datos
   writeData(wb,hoja,tabla,startCol = columnadatos, startRow = filadatos,rowNames=FALSE,
             colNames=FALSE,borderStyle="thin")
@@ -177,7 +188,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
            cols = columnadatos:(columnadatos+ncol(tabla)-1), 
            gridExpand = TRUE)
   for(i in 1:ncol(tabla)){
-    addStyle(wb, sheet = hoja, createStyle(numFmt=formatoNumero[i]), 
+    if(is.numeric(tabla[,i])) addStyle(wb, sheet = hoja, createStyle(numFmt=formatoNumero[i]), 
              rows = filadatos:(filadatos+nrow(tabla)-1), 
              cols = columnadatos+i-1,stack=TRUE,gridExpand = TRUE)
   }
