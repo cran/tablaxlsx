@@ -34,8 +34,13 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
     if(decimales[i]>0){
       formatoNumero[i]=paste0(formatoNumero[i],".",paste(rep("0",decimales[i]),collapse=""))
     }
-    if(porcentaje[i]) formatoNumero[i]=paste0(formatoNumero[i],"%")
-    if(inherits(tabla[,i],"numeric")) tabla[,i]=round(tabla[,i],decimales[i])
+    if(porcentaje[i]) {
+      decimales[i]=decimales[i]+2 
+      formatoNumero[i]=paste0(formatoNumero[i],"%")
+    }
+    if(inherits(tabla[,i],"numeric")) {
+      tabla[,i]=round(tabla[,i],decimales[i])
+    }  
   }
   
   estiloCabeceraColumna=estilos$estiloCabeceraColumna
