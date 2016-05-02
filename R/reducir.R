@@ -5,6 +5,9 @@ function(x,valores=NA,filas=TRUE,columnas=TRUE){
   nomcolumnas=colnames(x)
   nomdim=names(dimnames(x))
   x2=x[a1$Filas,a1$Columnas]
+  at1=attributes(x)
+  if(!is.null(attr(x,"cabColumna"))) attr(x2,"cabColumna")=attr(x,"cabColumna")
+  if(!is.null(attr(x,"cabFila"))) attr(x2,"cabFila")=attr(x,"cabFila ")
   #x2=t(t(x2))
   if(!is.data.frame(x2)) dim(x2)=c(sum(a1$Filas),sum(a1$Columnas))
   if(!is.null(nomfilas)) rownames(x2)=nomfilas[a1$Filas]
