@@ -4,6 +4,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
          cabecera="",fuente="",notas="",
          fila=7,columna=3,decimales=1,porcentaje=FALSE,
          cabecerasFila=TRUE,cabecerasColumna=TRUE,
+         cabeceraFilas="",cabeceraColumnas="",
          anchoCabecera=10,anchoDatos=14,
          escudo=NULL,posEscudo=c(1,1),tamEscudo=c(2.7,4.5),unidadesEscudo="cm",
          estilos=options("tablaxlsx.Estilos")[[1]],
@@ -64,18 +65,20 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
     if(inherits(tabla[,i],"numeric")) tabla[,i]=round(tabla[,i],decimales[i])
   }
   
-  estiloCabeceraColumna=estilos$estiloCabeceraColumna
-  estiloCabeceraFila=estilos$estiloCabeceraFila
+  estiloCabeceraColumna=estilos$estiloCabecerasColumna
+  estiloCabeceraFila=estilos$estiloCabecerasFila
   estiloCeldas=estilos$estiloCeldas
   estiloTitulo=estilos$estiloTitulo
   estiloFuente=estilos$estiloFuente
-  estiloEsquina=estilos$estiloEsquina
+  estiloEsquina=estilos$estiloCabeceraFilas
+  estiloCabeceraColumnas=estilos$estiloCabeceraColumnas
   
   if(is.null(estiloCabeceraColumna)) estiloCabeceraColumna <- createStyle()
   if(is.null(estiloCabeceraFila))    estiloCabeceraFila <- createStyle()
   if(is.null(estiloCeldas))          estiloCeldas <- createStyle()
   if(is.null(estiloTitulo))          estiloTitulo <- createStyle()
   if(is.null(estiloFuente))          estiloFuente <- createStyle()
+  if(is.null(estiloCabeceraColumnas)) estiloCabeceraColumnas <- estiloCabeceraColumna  
 
   #a1=formatC(tabla,format="f",dec=",",digits=decimales,big.mark=".")
   filadatos=fila+(cabecera!="")
@@ -94,6 +97,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
     }else{
       filadatos=filadatos+1      
     }
+    if(cabeceraColumnas!="") filadatos=filadatos+1
   }
   
   if(!is.null(names(estilosBordes))) names(estilosBordes)=toupper(names(estilosBordes))
@@ -118,13 +122,13 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
   }
   
   ###################Escribir las cabeceras
-  textosCabFilas=NULL
-  textosCabColumnas=NULL
+  #textosCabFilas=NULL
+  #textosCabColumnas=NULL
   if(cabecerasFila){
     tcab=attr(tabla,"cabFila") 
     if(!is.null(tcab)){
-      textosCabFilas=colnames(tcab)
-      dim(textosCabFilas)=c(1,length(textosCabFilas))
+      #textosCabFilas=colnames(tcab)
+      #if(!is.null(textosCabFilas)) dim(textosCabFilas)=c(1,length(textosCabFilas))
       writeData(wb,hoja,tcab,startCol =columna,
                 startRow = filadatos,rowNames = FALSE,colNames = FALSE)
       for(j in 1:ncol(tcab)){
@@ -137,7 +141,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
         }
       }
     }else{
-      textosCabFilas=names(dimnames(tabla))[1] 	
+      #textosCabFilas=names(dimnames(tabla))[1] 	
       if(is.null(rownames(tabla))){
         writeData(wb,hoja,matrix(paste("Fila",1:nrow(tabla)),ncol=1),startCol =columna,
                   startRow = filadatos,rowNames = FALSE,colNames = FALSE)
@@ -163,15 +167,25 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
     } 
   }
   
+  filacab=fila
+  if(cabeceraColumnas!=""){
+    mergeCells(wb,hoja,columnadatos+(0:(ncol(tabla)-1)),fila)
+    writeData(wb,hoja,cabeceraColumnas,startCol=columnadatos,startRow=fila)
+    addStyle(wb,hoja,estiloCabeceraColumnas,rows=fila,
+             cols=columnadatos+(0:(ncol(tabla)-1)),
+             gridExpand = TRUE, stack = TRUE)
+    filacab=filacab+1
+  }
+
   if(cabecerasColumna){
       tcab=attr(tabla,"cabColumna") 
       if(!is.null(tcab)){
-      	textosCabColumnas=rownames(tcab)
+      	#textosCabColumnas=rownames(tcab)
         writeData(wb,hoja,tcab,startCol =columnadatos,
-                  startRow = fila,rowNames = FALSE,colNames = FALSE)
+                  startRow = filacab,rowNames = FALSE,colNames = FALSE)
         for(i in 1:nrow(tcab)){
           columna1=columnadatos
-          fila1=fila+i-1
+          fila1=filacab+i-1
           for(j in 1:ncol(tcab)){
             if(attr(tcab,"colspan")[i,j]>1){
               mergeCells(wb,hoja,cols=columna1+j-2+(1:(attr(tcab,"colspan")[i,j])),rows=fila1)
@@ -179,17 +193,17 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
           }
         }
       }else{
-      	textosCabColumnas=names(dimnames(tabla))[2] 	
+      	#textosCabColumnas=names(dimnames(tabla))[2] 	
         if(is.null(colnames(tabla))){
           writeData(wb,hoja,matrix(paste("Columna",1:ncol(tabla)),nrow=1),startCol =columnadatos,
-                    startRow = fila,rowNames = FALSE,colNames = FALSE)
+                    startRow = filacab,rowNames = FALSE,colNames = FALSE)
         }else{
           writeData(wb,hoja,matrix(colnames(tabla),nrow=1),startCol =columnadatos,
-                    startRow = fila,rowNames = FALSE,colNames = FALSE) 
+                    startRow = filacab,rowNames = FALSE,colNames = FALSE) 
         }
       }
       addStyle(wb,hoja,estiloCabeceraColumna,
-               rows=fila:(filadatos-1),
+               rows=filacab:(filadatos-1),
                cols=columnadatos+(0:(ncol(tabla)-1)),
                gridExpand = TRUE, stack = TRUE)
       if("CABECERASCOLUMNA" %in% toupper(bordes)){
@@ -206,15 +220,18 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
   
   
   #if(fila<filadatos | columna<columnadatos){
-  if(cabecerasFila & cabecerasColumna){
-
-  	if(!is.null(textosCabFilas)){
-       writeData(wb,hoja,textosCabFilas,startCol=columna,startRow=(filadatos-1),rowNames = FALSE,colNames = FALSE)
-  	}else{
-  		if(!is.null(textosCabColumnas)){
-           writeData(wb,hoja,t(textosCabColumnas),startCol=(columnadatos-1),startRow=fila,rowNames = FALSE,colNames = FALSE)
-  		}
-  	}
+  if(cabecerasFila & (cabecerasColumna | cabeceraColumnas!="")){
+    mergeCells(wb,hoja,columna:(columnadatos-1),fila:(filadatos-1))
+    if(cabeceraFilas!=""){
+      writeData(wb,hoja,cabeceraFilas[1],startCol=columna,startRow=fila,rowNames = FALSE,colNames = FALSE)
+    } 
+  	#if(!is.null(textosCabFilas)){
+    #   writeData(wb,hoja,textosCabFilas,startCol=columna,startRow=(filadatos-1),rowNames = FALSE,colNames = FALSE)
+  	#}else{
+  	#	if(!is.null(textosCabColumnas)){
+    #       writeData(wb,hoja,t(textosCabColumnas),startCol=(columnadatos-1),startRow=fila,rowNames = FALSE,colNames = FALSE)
+  	#	}
+  	#}
   	if(is.null(estiloEsquina)){
   	  colorf=NULL
   	  if(!is.null(estiloCabeceraFila$fill$fillFg$rgb)) colorf=paste0("#",substr(estiloCabeceraFila$fill$fillFg$rgb,3,12))
@@ -291,7 +308,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
       fila=fila+1
     }
   }
-  if(!is.null(fichero)) saveWorkbook(wb,fichero)
+  if(!is.null(fichero)) saveWorkbook(wb,fichero,overwrite=TRUE)
   if(wbCreado){
     return(invisible(wb))
   }else{

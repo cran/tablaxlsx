@@ -1,13 +1,13 @@
 \name{estilosDGE}
 \alias{estilosDGE}
 \docType{data}
-\title{An example of styles to use}
+\title{An example of styles for to use}
 \description{
-List of example styles
+Styles's list of example
 }
 \usage{data("estilosDGE")}
 \format{
-  List of example styles
+  Styles's list of example
 }
 
 \examples{

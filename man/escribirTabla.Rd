@@ -9,8 +9,10 @@ escribirTabla(tabla, wb=NULL,hoja=NULL,fichero=NULL,
               limpiarFilas=TRUE,limpiarColumnas=TRUE,limpiarValores=NA,
               cabecera = "", fuente = "", notas = "",
               fila = 7, columna = 3, decimales = 1, porcentaje = FALSE,
-              cabecerasFila = TRUE, cabecerasColumna = TRUE, anchoCabecera = 10,
-              anchoDatos = 14, escudo = NULL,posEscudo=c(1,1),
+              cabecerasFila = TRUE, cabecerasColumna = TRUE, 
+              cabeceraFilas="",cabeceraColumnas="",
+              anchoCabecera = 10,anchoDatos = 14, 
+              escudo = NULL,posEscudo=c(1,1),
               tamEscudo=c(2.7,4.5),unidadesEscudo="cm",
               estilos=options("tablaxlsx.Estilos")[[1]],
               bordes = c("TABLA","CABECERA","CABECERASFILA","CABECERASCOLUMNA","DATOS"),
@@ -34,6 +36,8 @@ escribirTabla(tabla, wb=NULL,hoja=NULL,fichero=NULL,
   \item{porcentaje}{If the data is given percentage format or not. It may be a vector, in which case it is applied successively to each column, recycling values if required}
   \item{cabecerasFila}{If you write or not the rows headers, which will be the names of the rows of the matrix or the corresponding elements of a ftable}
   \item{cabecerasColumna}{If you write or not the columns headers, which will be the names of the rows of the matrix or the corresponding elements of a ftable}
+  \item{cabeceraFilas}{Text to write above the row's headers}
+  \item{cabeceraColumnas}{Text to write above the row's headers}
   \item{anchoCabecera}{The width, in characters, of the columns of the row header}
   \item{anchoDatos}{The width, in characters, of the data columns}
   \item{escudo}{If it is NULL does not any figure, if it is a text is inserted the figure that is in the file}
@@ -42,7 +46,7 @@ escribirTabla(tabla, wb=NULL,hoja=NULL,fichero=NULL,
   \item{unidadesEscudo}{Units of the height of the image. By default "cm"}
   \item{estilos}{A list with the styles to apply to the various elements of the table.}
   \item{bordes}{A vector with the names of the elements in the table will be to surround with edges,  the possible values are:
-HEADER, CABECERASFILA, CABECERASCOLUMNA, DATOS, TABLA (the entire table)}
+CABECERA, CABECERASFILA, CABECERASCOLUMNA, DATOS, TABLA (the entire table)}
   \item{estilosBordes}{A list with the styles of the various edges. Each item will be called with one of the possible names on bordes.}
 }
 \details{
