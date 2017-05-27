@@ -5,18 +5,19 @@ function(x,valores=NA,filas=TRUE,columnas=TRUE){
   nomcolumnas=colnames(x)
   nomdim=names(dimnames(x))
   x2=x[a1$Filas,a1$Columnas]
-  at1=attributes(x)
-  if(!is.null(attr(x,"cabColumna"))) attr(x2,"cabColumna")=attr(x,"cabColumna")
-  if(!is.null(attr(x,"cabFila"))) attr(x2,"cabFila")=attr(x,"cabFila ")
+  #at1=attributes(x)
+  #if(!is.null(attr(x,"cabColumna"))) attr(x2,"cabColumna")=attr(x,"cabColumna")
+  #if(!is.null(attr(x,"cabFila"))) attr(x2,"cabFila")=attr(x,"cabFila ")
   #x2=t(t(x2))
   if(!is.data.frame(x2)) dim(x2)=c(sum(a1$Filas),sum(a1$Columnas))
   if(!is.null(nomfilas)) rownames(x2)=nomfilas[a1$Filas]
   if(!is.null(nomcolumnas))colnames(x2)=nomcolumnas[a1$Columnas]
   if(!is.null(nomdim)) names(dimnames(x2))=nomdim
   if(!inherits(x,"ftable") & 
-     (is.null(attr(x,"cabFila")) | is.null(attr(x,"cabColumna")))){
+     (is.null(attr(x,"cabFila")) & is.null(attr(x,"cabColumna")))){
     return(x2)
   }  
+  cabf=cabc=NULL
   if(inherits(x,"ftable")){
     cabf=cabe(attr(x,"row.vars"))
     cabc=t(cabe(attr(x,"col.vars")))

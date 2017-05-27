@@ -15,7 +15,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
   if(length(dim(tabla))!=2){
   	tabla=tryCatch(as.matrix(tabla),error=function(e) stop("tabla: incorrect number of dimensions"))
   } 
-  
+  if(is.table(tabla)) class(tabla)="matrix"
   wbCreado=FALSE
   
   if(is.null(wb)){
@@ -294,12 +294,7 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
   #   setRowHeights(wb,hoja,rows=1,heights=10)
   
   fila=filadatos+nrow(tabla)
-  if(fuente!=""){
-    writeData(wb,hoja,fuente,colNames=FALSE,rowNames=FALSE,startCol=columna,startRow=fila)
-    addStyle(wb,hoja,estiloFuente,rows=fila,cols=columna)
-    mergeCells(wb,hoja,cols=(columna:(columnadatos+ncol(tabla)-1)),rows=fila)
-    fila=fila+1
-  } 
+  filares=fila
   for(nota in notas){
     if(nota!=""){
       writeData(wb,hoja,nota,colNames=FALSE,rowNames=FALSE,startCol=columna,startRow=fila)
@@ -308,10 +303,17 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
       fila=fila+1
     }
   }
+  if(fuente!=""){
+    writeData(wb,hoja,fuente,colNames=FALSE,rowNames=FALSE,startCol=columna,startRow=fila)
+    addStyle(wb,hoja,estiloFuente,rows=fila,cols=columna)
+    mergeCells(wb,hoja,cols=(columna:(columnadatos+ncol(tabla)-1)),rows=fila)
+    fila=fila+1
+  } 
   if(!is.null(fichero)) saveWorkbook(wb,fichero,overwrite=TRUE)
   if(wbCreado){
     return(invisible(wb))
   }else{
     return(invisible(c(Fila=(fila-1),Columna=(columnadatos+ncol(tabla)-1))))
+    #return(invisible(c(Fila=(fila-1),Columna=(columnadatos+ncol(tabla)-1),FilaDatos=filares)))
   }  
 }
