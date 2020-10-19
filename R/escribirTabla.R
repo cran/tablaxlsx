@@ -313,7 +313,10 @@ function(tabla,wb=NULL,hoja=NULL,fichero=NULL,
   if(wbCreado){
     return(invisible(wb))
   }else{
-    return(invisible(c(Fila=(fila-1),Columna=(columnadatos+ncol(tabla)-1))))
+  	names(fila)=NULL
+    r1=c(Fila=(fila-1),Columna=(columnadatos+ncol(tabla)-1))
+    names(r1)=c("Fila","Columna")
+    return(invisible(r1))
     #return(invisible(c(Fila=(fila-1),Columna=(columnadatos+ncol(tabla)-1),FilaDatos=filares)))
   }  
 }
