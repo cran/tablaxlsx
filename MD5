@@ -1,5 +1,5 @@
-a3604435363f7b5c5e3862f9dca23b0d *DESCRIPTION
-1eef7e3611ef8873647869f7ad98bd53 *NAMESPACE
+4a614ff3d5148ce10ba2517a13d2f2d1 *DESCRIPTION
+643de9f11c86da33dd82970815404864 *NAMESPACE
 6019ae50439d957a7d9226fba12f2dc5 *R/bordear.R
 84744751b25322943ab86364b0384cf0 *R/cabe.R
 d5adb6ef21bd70b3c010814222838d7b *R/escribirTabla.R
@@ -8,7 +8,6 @@ fee1981246222215a0be1c21825b28e2 *R/limpiar.R
 64e918476ca33ee47e382039f580cc77 *R/reducir.R
 20e561a7f78c229d1f47c8f955830093 *R/spanrow.R
 fd188f1a23ded025dbe95fa2bf50047c *R/tablaxlsx.estilos.set.r
-01da145883093073adad9f5beae971b2 *R/trim.R
 b72ae0f31f6fabc594132dd633f55e41 *R/verXL.r
 d853abdaf569b4c2fa2c25f7884afe48 *data/estilosDGE.rda
 09dc4c347a6951d36a323f54bbd9e9e9 *data/estilosDGPYE.rda
@@ -20,5 +19,4 @@ c20ed496dc1a3a28db7048d20e4ba236 *man/estilosDGE.Rd
 71f019ae3d055935c0f184bd8f9eec59 *man/estilosDGEPYE.Rd
 c301ac3b30cff41ae7a76b4c58287b6c *man/reducir.Rd
 a706a9b67d4d3936524f5ecc9daf13c5 *man/tablaxlsx.estilos.set.Rd
-d69171f325044a7824899170033375a3 *man/trim.Rd
 7d7c23e91f6137ac8d24030a85fd6d80 *man/verXL.Rd
