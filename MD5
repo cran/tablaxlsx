@@ -1,4 +1,4 @@
-4a614ff3d5148ce10ba2517a13d2f2d1 *DESCRIPTION
+708253d08fd3d23491ea96d54847082f *DESCRIPTION
 643de9f11c86da33dd82970815404864 *NAMESPACE
 6019ae50439d957a7d9226fba12f2dc5 *R/bordear.R
 84744751b25322943ab86364b0384cf0 *R/cabe.R
@@ -13,10 +13,10 @@ d853abdaf569b4c2fa2c25f7884afe48 *data/estilosDGE.rda
 09dc4c347a6951d36a323f54bbd9e9e9 *data/estilosDGPYE.rda
 cabb2b258cce4a0f2983ffea6d795291 *inst/img/Thumbs.db
 e10aaae49da54fee8f9757ce2eac55e1 *inst/img/logoJMR.png
-57ee459cdbc90796fdf32723cc6d2aa1 *man/bordear.Rd
-24e898a7935eb26c0a8338ca131f970e *man/escribirTabla.Rd
+d3147a982df413136c5347695a63fead *man/bordear.Rd
+cdfb03fc0345bb4748e825c0bddcf86a *man/escribirTabla.Rd
 c20ed496dc1a3a28db7048d20e4ba236 *man/estilosDGE.Rd
 71f019ae3d055935c0f184bd8f9eec59 *man/estilosDGEPYE.Rd
 c301ac3b30cff41ae7a76b4c58287b6c *man/reducir.Rd
-a706a9b67d4d3936524f5ecc9daf13c5 *man/tablaxlsx.estilos.set.Rd
+a82b4915c43744dbfaf59705067dc087 *man/tablaxlsx.estilos.set.Rd
 7d7c23e91f6137ac8d24030a85fd6d80 *man/verXL.Rd

@@ -21,7 +21,7 @@ bordear(wb, hoja, fila = 1, columna = 1, ancho = 1, alto = 1,
 }
 \details{Of the parameter estilo is used: border, borderColour and borderStyle. The last two can be vectors, in such a way that each feature is applied to the corresponding edge, according to the order established in border}
 
-\seealso{\code{\link{createStyle}}}
+\seealso{\code{\link[openxlsx]{createStyle}}}
 \examples{
   ## Example
   require(openxlsx)

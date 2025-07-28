@@ -16,5 +16,5 @@ tablaxlsx.estilos.set(estilos.defecto)
 Puts the list estilos.defecto in the  tablaxlsx.Estilos option for use by default in escribirTabla. 
 }
 
-\seealso{\link{escribirTabla}, \link{createStyle} and \link{estilosDGE}}
+\seealso{\link{escribirTabla}, \link[openxlsx]{createStyle} and \link{estilosDGE}}
 

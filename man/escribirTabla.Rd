@@ -56,7 +56,7 @@ Edges are drawn in the order: CABECERA,CABECERASFILA,CABECERASCOLUMNA,DATOS,TABL
 If it have created a Workbook returns the Workbook created, otherwise returns a vector with the row and column of the lower-right cell of the table with notes and source in the worksheet and the lower-right cell of the table only.
 }
 
-\seealso{\link{createStyle}}
+\seealso{\link[openxlsx]{createStyle}}
 
 \examples{
 ## Example 1
